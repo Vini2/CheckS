@@ -1,0 +1,11 @@
+name: checks
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.7.4
+  - biopython=1.74
+  - dsk=2.3.3
+  - minimap2=2.18
+  - quast=5.0.2
+  - coverm=0.6.1
