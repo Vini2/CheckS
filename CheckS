@@ -1,0 +1,193 @@
+#!/usr/bin/env python3
+
+"""CheckS: Checking the presence of a species in a metagenomics sample."""
+
+import argparse
+import os
+import sys
+import subprocess
+
+__author__ = "Vijini Mallawaarachchi and Yu Lin"
+__copyright__ = "Copyright 2020, CheckS Project"
+__license__ = "GPL-3.0"
+__version__ = "0.1"
+__maintainer__ = "Vijini Mallawaarachchi"
+__email__ = "vijini.mallawaarachchi@anu.edu.au"
+__status__ = "Prototype"
+
+parser = argparse.ArgumentParser(description="""CheckS is a pipeline to check the presence of a species
+                                            in a metagenomics sample, provided its reference genome and
+                                            the reference genomes of the other known species.""")
+
+parser.add_argument("--contigs", 
+                    required=True,
+                    type=str,
+                    help="path to the contigs file")
+
+parser.add_argument("--reads1", 
+                    required=True,
+                    type=str,
+                    help="path to the forward reads file")
+
+parser.add_argument("--reads2", 
+                    required=True,
+                    type=str,
+                    help="path to the reverse reads file")
+
+parser.add_argument("--query_ref", 
+                    required=True,
+                    type=str,
+                    help="path to the query reference genome")
+
+parser.add_argument("--other_refs", 
+                    required=True,
+                    type=str,
+                    help="path to the folder with other reference genomes")
+
+parser.add_argument("--output", 
+                    required=True,
+                    type=str,
+                    help="path to the output folder")
+
+parser.add_argument("--ref_ext", 
+                    required=False, 
+                    type=str, 
+                    default="fasta", 
+                    help="extension of the reference genome files. [default: fasta]")
+
+parser.add_argument("--k", 
+                    required=False, 
+                    type=int, 
+                    default=25, 
+                    help="k value to run DSK k-mer counting. [default: 25]")
+
+parser.add_argument("--similarity", 
+                    required=False, 
+                    type=float, 
+                    default=0.9, 
+                    help="similarity threshold for mapping. [default: 0.9]")
+
+parser.add_argument("--prefix", 
+                    required=False,
+                    type=str,
+                    default='',
+                    help="prefix for the output file")
+
+parser.add_argument("--nthreads", 
+                    required=False, 
+                    type=int, 
+                    default=8, 
+                    help="number of threads/cores to use. [default: 8]")
+
+parser.add_argument('-v', '--version', action='version', version='%(prog)s ' + __version__)
+
+args = vars(parser.parse_args())
+
+contigs = args["contigs"]
+reads1 = args["reads1"]
+reads2 = args["reads2"]
+query_ref = args["query_ref"]
+other_refs = args["other_refs"]
+ref_ext = args["ref_ext"]
+output_path = args["output"]
+k_val = args["k"]
+similarity = args["similarity"]
+prefix = args["prefix"]
+nthreads = args["nthreads"]
+
+
+# Validation of inputs
+#---------------------------------------------------
+
+# Check contigs file
+if not os.path.isfile(contigs):
+    print("\nFailed to locate the contigs file.")
+    print("Exiting CheckS...\nBye...!\n")
+    sys.exit(1)
+
+# Check reads1 file
+if not os.path.isfile(reads1):
+    print("\nFailed to locate the forward reads file.")
+    print("Exiting CheckS...\nBye...!\n")
+    sys.exit(1)
+
+# Check reads2 file
+if not os.path.isfile(reads2):
+    print("\nFailed to locate the reverse reads file.")
+    print("Exiting CheckS...\nBye...!\n")
+    sys.exit(1)
+
+# Check query_ref file
+if not os.path.isfile(query_ref):
+    print("\nFailed to locate the query reference genome file.")
+    print("Exiting CheckS...\nBye...!\n")
+    sys.exit(1)
+
+# Check other_refs file
+if not os.path.isdir(other_refs):
+    print("\nFailed to locate the folder with other reference genomes.")
+    print("Exiting CheckS...\nBye...!\n")
+    sys.exit(1)
+
+# Handle for missing trailing forwardslash in output folder path
+if output_path[-1:] != "/":
+    output_path = output_path + "/"
+if other_refs[-1:] != "/":
+    other_refs = other_refs + "/"
+
+# Create output folder if it does not exist
+if not os.path.isdir(output_path):
+    subprocess.run("mkdir -p "+output_path, shell=True)
+
+# Validate k
+if k_val <= 1:
+    print("\nPlease enter a valid k value")
+    print("Exiting CheckS...\nBye...!\n")
+    sys.exit(1)
+
+# Validate similarity
+if similarity <= 0.0 or similarity >= 1.0:
+    print("\nPlease enter a valid similarity threshold (between 0 to 1).")
+    print("Exiting CheckS...\nBye...!\n")
+    sys.exit(1)
+
+# Validate prefix
+if args["prefix"] != '':
+    if args["prefix"].endswith("_"):
+        prefix = args["prefix"]
+    else:
+        prefix = args["prefix"]+"_"
+else:
+    prefix = ''
+
+# Validate extension
+ref_extensions = ["fasta", "fa", "fna"]
+if ref_ext not in ref_extensions:
+    print("\nPlease enter a valid extension")
+    print("Exiting CheckS...\nBye...!\n")
+    sys.exit(1)
+
+# Validate number of threads
+if nthreads <= 0:
+    print("\nPlease enter a valid number for the number of threads")
+    print("Exiting CheckS...\nBye...!\n")
+    sys.exit(1)
+
+
+# Run CheckS
+#---------------------------------------------------
+
+cmdCheckS = """python "{0}/src/main.py" --contigs "{1}" --reads1 "{2}" --reads2 "{3}" --query_ref "{4}" --other_refs "{5}" --ref_ext "{6}" --output "{7}" --prefix "{8}" --nthreads "{9}" """.format(
+    os.path.dirname(__file__), 
+    contigs,
+    reads1,
+    reads2,
+    query_ref,
+    other_refs,
+    ref_ext,
+    output_path,
+    prefix,
+    nthreads)
+
+
+os.system(cmdCheckS)
