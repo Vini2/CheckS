@@ -10,11 +10,12 @@ CheckS is a pipeline to check the presence of a species in NGS data (reads and a
 
 ### Dependencies
 CheckS requires Python 3.7 (tested on Python 3.7.4). You will need the following tools and python packages installed. Versions tested on are listed as well.
+* [Biopython](https://biopython.org/) - version 1.74
 * [DSK](https://github.com/GATB/dsk) - version 2.3.3
 * [Minimap2](https://github.com/lh3/minimap2) - version 2.18
 * [CoverM](https://github.com/wwood/CoverM) - version 0.6.1
 * [QUAST](http://bioinf.spbau.ru/quast) - version 5.0.2
-* [Biopython](https://biopython.org/) - version 1.74
+* [MetaGeneMark](https://github.com/aghozlane/spasm/tree/master/MetaGeneMark/mgm)
 
 ### Downloading GraphBin2
 You can download the latest release of CheckS from [Releases](https://github.com/Vini2/CheckS/releases) or clone the CheckS repository to your machine.
@@ -101,4 +102,4 @@ optional arguments:
 
 [4] Minimap2: pairwise alignment for nucleotide sequences. Li. Bioinformatics, Volume 34, Issue 18, 15 September 2018, Pages 3094–3100.
 
-[5] MetaGeneMark - https://github.com/aghozlane/spasm/tree/master/MetaGeneMark/mgm
+[5] Ab Initio Gene Identification in Metagenomic Sequences. Tang and Borodovsky. In: Nelson K. (eds) Encyclopedia of Metagenomics. Springer, New York, NY.
