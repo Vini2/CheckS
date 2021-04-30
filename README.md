@@ -52,3 +52,53 @@ If you want to switch back to your normal environment, run the following command
 ```
 conda deactivate
 ```
+
+## Using CheckS
+You can see the usage options of CheckS by typing `./CheckS -h` on the command line. For example,
+```
+usage: CheckS [-h] --contigs CONTIGS --reads1 READS1 --reads2 READS2
+              --query_ref QUERY_REF --other_refs OTHER_REFS --output OUTPUT
+              [--ref_ext REF_EXT] [--k K] [--similarity SIMILARITY]
+              [--prefix PREFIX] [--nthreads NTHREADS] [-v]
+
+CheckS is a pipeline to check the presence of a species in a metagenomics
+sample, provided its reference genome and the reference genomes of the other
+known species.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --contigs CONTIGS     path to the contigs file
+  --reads1 READS1       path to the forward reads file
+  --reads2 READS2       path to the reverse reads file
+  --query_ref QUERY_REF
+                        path to the query reference genome
+  --other_refs OTHER_REFS
+                        path to the folder with other reference genomes
+  --output OUTPUT       path to the output folder
+  --ref_ext REF_EXT     extension of the reference genome files. [default:
+                        fasta]
+  --k K                 k value to run DSK k-mer counting. [default: 25]
+  --similarity SIMILARITY
+                        similarity threshold for mapping. [default: 0.9]
+  --prefix PREFIX       prefix for the output file
+  --nthreads NTHREADS   number of threads/cores to use. [default: 8]
+  -v, --version         show program's version number and exit
+```
+
+## Example Usage
+
+```
+./checks --contigs contigs.fasta --reads1 reads_1.fq --reads2 reads_2.fq --query_ref Klebsiella_variicola.fasta --other_refs Reference_Sequences/ --output /path/to/output/
+```
+
+## References
+
+[1] DSK: k-mer counting with very low memory usage. Rizk et al. Bioinformatics, Volume 29, Issue 5, 1 March 2013, Pages 652–653.
+
+[2] CoverM - https://github.com/wwood/CoverM
+
+[3] MetaQUAST: evaluation of metagenome assemblies. Mikheenko et al. Bioinformatics, Volume 32, Issue 7, 1 April 2016, Pages 1088–1090.
+
+[4] Minimap2: pairwise alignment for nucleotide sequences. Li. Bioinformatics, Volume 34, Issue 18, 15 September 2018, Pages 3094–3100.
+
+[5] MetaGeneMark - https://github.com/aghozlane/spasm/tree/master/MetaGeneMark/mgm
