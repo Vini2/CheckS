@@ -4,29 +4,38 @@ import subprocess
 import os
 import logging
 
+from collections import defaultdict
+
 # create logger
 logger = logging.getLogger('CheckS 0.1')
 
+
 def run_metagenemark(output_folders, contigs_file, contigs_file_name, contigs_file_ext, output_path):
-    
+
+    mgm_path = os.environ['MGM_PATH'] + "/"
+
     for output_folder in output_folders:
-        
+
         logger.debug("Running MetaGeneMark in "+output_folder)
-        
+
         # Run MetaGeneMark on ref.fasta
-        # subprocess.run("/media/vijinim/data/Software/MetaGeneMark_linux_64/mgm/gmhmmp -a -d -m /media/vijinim/data/Software/MetaGeneMark_linux_64/mgm/MetaGeneMark_v1.mod "+output_folder+"ref.fasta", shell=True)
-        
+        subprocess.run(mgm_path + "gmhmmp -a -d -m " + mgm_path +
+                       "MetaGeneMark_v1.mod "+output_folder+"ref.fasta", shell=True)
+
         # Run MetaGeneMark on refs_combined.fasta
-        # subprocess.run("/media/vijinim/data/Software/MetaGeneMark_linux_64/mgm/gmhmmp -a -d -m /media/vijinim/data/Software/MetaGeneMark_linux_64/mgm/MetaGeneMark_v1.mod "+output_folder+"refs_combined.fasta", shell=True)
-        
+        subprocess.run(mgm_path + "gmhmmp -a -d -m " + mgm_path +
+                       "MetaGeneMark_v1.mod "+output_folder+"refs_combined.fasta", shell=True)
+
     # Run MetaGeneMark on contigs
-    subprocess.run("/media/vijinim/data/Software/MetaGeneMark_linux_64/mgm/gmhmmp -a -d -m /media/vijinim/data/Software/MetaGeneMark_linux_64/mgm/MetaGeneMark_v1.mod "+contigs_file, shell=True)
-    subprocess.run("mv "+contigs_file+".lst "+output_path+contigs_file_name+"."+contigs_file_ext+".lst", shell=True)
+    subprocess.run(mgm_path + "gmhmmp -a -d -m " + mgm_path +
+                   "MetaGeneMark_v1.mod "+contigs_file, shell=True)
+    subprocess.run("mv "+contigs_file+".lst "+output_path +
+                   contigs_file_name+"."+contigs_file_ext+".lst", shell=True)
 
 
 def get_seqs(path):
     active = ""
-    
+
     for line in open(path):
         if line[0] == ">":
             active += line
@@ -40,10 +49,11 @@ def get_seqs(path):
 
 
 def align(target, query, output_folder, output_name, threshold):
-    
+
     if not os.path.isfile(output_folder+output_name):
-    
-        subprocess.run("minimap2 "+target+" "+query+" > "+output_folder+output_name+".paf", shell=True)
+
+        subprocess.run("minimap2 "+target+" "+query+" > " +
+                       output_folder+output_name+".paf", shell=True)
 
         contig_ref = defaultdict(list)
         contig_ref_aln_length = defaultdict(list)
@@ -51,7 +61,7 @@ def align(target, query, output_folder, output_name, threshold):
 
         for line in open(output_folder+output_name+".paf"):
             data = line.strip().split('\t')
-            
+
 #     1	string	Query sequence name
 #     2	int	Query sequence length
 #     3	int	Query start (0-based; BED-like; closed)
