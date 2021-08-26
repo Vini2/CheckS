@@ -101,7 +101,7 @@ optional arguments:
 ## Example Usage
 
 ```
-./checks --contigs contigs.fasta --reads1 reads_1.fq --reads2 reads_2.fq --query_ref Klebsiella_variicola.fasta --other_refs Reference_Sequences/ --output /path/to/output/
+./CheckS --contigs contigs.fasta --reads1 reads_1.fq --reads2 reads_2.fq --query_ref Klebsiella_variicola.fasta --other_refs Reference_Sequences/ --output /path/to/output/
 ```
 
 ## References
