@@ -2,7 +2,7 @@
   <img src="CheckS_Logo.png" width="500" title="CheckS logo" alt="CheckS logo">
 </p>
 
-# CheckS: Checking the presence of a species in a metagenomics sample
+# CheckS: Checking the presence of a species in a metagenomics sample with known taxonomic composition
 
 CheckS is a pipeline to check the presence of a species in NGS data (reads and assembled contigs) of a metagenomics sample, provided its reference genome and the reference genomes of the other known species. 
 
@@ -21,7 +21,7 @@ CheckS requires Python 3.7 (tested on Python 3.7.4). You will need the following
 * [Minimap2](https://github.com/lh3/minimap2) - version 2.18
 * [CoverM](https://github.com/wwood/CoverM) - version 0.6.1
 * [QUAST](http://bioinf.spbau.ru/quast) - version 5.0.2
-* [MetaGeneMark](https://github.com/aghozlane/spasm/tree/master/MetaGeneMark/mgm)
+* [MetaGeneMark](http://exon.gatech.edu/GeneMark/license_download.cgi)
 
 ### Downloading GraphBin2
 You can download the latest release of CheckS from [Releases](https://github.com/Vini2/CheckS/releases) or clone the CheckS repository to your machine.
@@ -45,11 +45,17 @@ cd CheckS/
 ### Setting up the environment
 We recommend that you use [Conda](https://docs.conda.io/en/latest/) to run CheckS. You can download [Anaconda](https://www.anaconda.com/distribution/) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html) which contains Conda.
 
-Once you have installed Conda, make sure you are in the CheckS folder. Now run the following commands to create a Conda environment and activate it to run CheckS.
+Once you have installed Conda, make sure you are in the `CheckS` folder. Now run the following commands to create a Conda environment and activate it to run CheckS.
 
 ```
 conda env create -f environment.yml
 conda activate checks
+```
+
+You will have to download and setup **MetaGeneMark** from [http://exon.gatech.edu/GeneMark/license_download.cgi](http://exon.gatech.edu/GeneMark/license_download.cgi). Next export the path to the MetaGeneMark folder.
+
+```
+export MGM_PATH=/path/to/MetaGeneMark_linux_64/mgm
 ```
 
 Now you are ready to run CheckS.
