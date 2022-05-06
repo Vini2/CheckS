@@ -1,5 +1,8 @@
 site_name: CheckS
 site_url: "https://github.com/Vini2/CheckS"
+site_author: "Vijini Mallawaarachchi"
+repo_url: "https://github.com/Vini2/CheckS"
+repo_name: 'GitHub'
 theme:
     name: readthedocs
     highlightjs: true
@@ -10,4 +13,4 @@ theme:
         - text
 nav:
     - ABOUT:
-      - Motivation: index.md
+      - Introduction: index.md
