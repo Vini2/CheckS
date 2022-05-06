@@ -1,1 +1,13 @@
-site_name: My Docs
+site_name: CheckS
+site_url: "https://github.com/Vini2/CheckS"
+theme:
+    name: readthedocs
+    highlightjs: true
+    hljs_languages:
+        - yaml
+        - bash
+        - shell
+        - text
+nav:
+    - ABOUT:
+      - Motivation: index.md
