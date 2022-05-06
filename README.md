@@ -23,7 +23,7 @@ CheckS requires Python 3.7 (tested on Python 3.7.4). You will need the following
 * [QUAST](http://bioinf.spbau.ru/quast) - version 5.0.2
 * [MetaGeneMark](http://exon.gatech.edu/GeneMark/license_download.cgi)
 
-### Downloading GraphBin2
+### Downloading CheckS
 You can download the latest release of CheckS from [Releases](https://github.com/Vini2/CheckS/releases) or clone the CheckS repository to your machine.
 
 ```
