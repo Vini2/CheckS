@@ -12,5 +12,6 @@ theme:
         - shell
         - text
 nav:
+    - Home: 'index.md'
     - ABOUT:
       - Introduction: index.md
