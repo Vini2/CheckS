@@ -5,7 +5,7 @@ import os
 import logging
 
 # create logger
-logger = logging.getLogger('CheckS 0.1')
+logger = logging.getLogger('CheckS 0.1.0')
 
 
 def run_dsk(contigs_file, contigs_file_name, reads_file_1, reads_file_2, output_folders, k_val, n_cores, output_path):

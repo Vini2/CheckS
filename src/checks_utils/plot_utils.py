@@ -9,7 +9,7 @@ import logging
 plt.rcParams.update({'font.size': 24})
 
 # create logger
-logger = logging.getLogger('CheckS 0.1')
+logger = logging.getLogger('CheckS 0.1.0')
 
 
 def plot_kmer_res(width, size1, size2, figformat, figdpi, kmers_in_reads, kmers_in_contigs, x_labels, output_path, prefix):

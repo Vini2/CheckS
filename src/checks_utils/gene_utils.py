@@ -7,7 +7,7 @@ import logging
 from collections import defaultdict
 
 # create logger
-logger = logging.getLogger('CheckS 0.1')
+logger = logging.getLogger('CheckS 0.1.0')
 
 
 def run_metagenemark(output_folders, contigs_file, contigs_file_name, contigs_file_ext, output_path):

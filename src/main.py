@@ -108,7 +108,7 @@ nthreads = args["nthreads"]
 
 # Setup logger
 # -----------------------
-logger = logging.getLogger('CheckS 0.1')
+logger = logging.getLogger('CheckS 0.1.0')
 logger.setLevel(logging.DEBUG)
 logging.captureWarnings(True)
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
