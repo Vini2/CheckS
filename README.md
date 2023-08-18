@@ -4,6 +4,9 @@
 
 # CheckS: Checking the presence of a species in a metagenomics sample with known taxonomic composition
 
+![GitHub](https://img.shields.io/github/license/Vini2/CheckS)
+
+
 CheckS is a pipeline to check the presence of a species in NGS data (reads and assembled contigs) of a metagenomics sample, provided its reference genome and the reference genomes of the other known species. 
 
 CheckS carries out four analysis steps to determine the presence of a query reference genome as follows.
