@@ -4,8 +4,8 @@
 
 # CheckS: Checking the presence of a species in a metagenomics sample with known taxonomic composition
 
+[![DOI](https://zenodo.org/badge/360724947.svg)](https://zenodo.org/badge/latestdoi/360724947)
 ![GitHub](https://img.shields.io/github/license/Vini2/CheckS)
-
 
 CheckS is a pipeline to check the presence of a species in NGS data (reads and assembled contigs) of a metagenomics sample, provided its reference genome and the reference genomes of the other known species. 
 
